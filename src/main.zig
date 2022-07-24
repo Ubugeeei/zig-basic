@@ -281,3 +281,12 @@ test "vector add" {
     const z = x + y;
     try assert(z, Vector(4, f32){ 3, 0, 20, 0 });
 }
+
+test "allocation" {
+    const allocator = @import("std").heap.page_allocator;
+    const memory = try allocator.alloc(u8, 100);
+    defer allocator.free(memory);
+
+    try assert(memory.len, 100);
+    try assert(@TypeOf(memory), []u8);
+}
