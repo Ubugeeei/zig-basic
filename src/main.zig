@@ -30,3 +30,14 @@ test "array" {
     try assert(b.len, 5);
     try assert(b[4], 'd');
 }
+
+test "if statement" {
+    const a = true;
+    var x: u16 = 0;
+    if (a) {
+        x += 1;
+    } else {
+        x += 2;
+    }
+    try assert(x, 1);
+}
