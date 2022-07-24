@@ -204,3 +204,25 @@ test "set enum ordinal value" {
     try assert(@enumToInt(Value2.million), 1000000);
     try assert(@enumToInt(Value2.next), 1000001);
 }
+
+const Suit = enum {
+    clubs,
+    spades,
+    diamonds,
+    hearts,
+    pub fn isClubs(self: Suit) bool {
+        return self == Suit.clubs;
+    }
+};
+test "enum method" {
+// const Suit = enum {
+//     clubs,
+//     spades,
+//     diamonds,
+//     hearts,
+//     pub fn isClubs(self: Suit) bool { // error!
+//         return self == Suit.clubs;
+//     }
+// };
+    try assert(Suit.spades.isClubs(), Suit.isClubs(.spades));
+}
