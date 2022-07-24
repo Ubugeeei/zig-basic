@@ -264,3 +264,12 @@ test "union" {
     }
     try assert(value.b, 3);
 }
+
+test "optional" {
+    var found_index: ?usize = null;
+    const data = [_]i32{ 1, 2, 3, 4, 5, 6, 7, 8, 12 };
+    for (data) |v, i| {
+        if (v == 10) found_index = i;
+    }
+    try assert(found_index, null);
+}
