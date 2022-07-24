@@ -309,9 +309,8 @@ test "print" {
     );
 }
 
-
 fn ticker(step: u8) void {
-    while(true) {
+    while (true) {
         std.time.sleep(1 * std.time.ns_per_s);
         tick += @as(isize, step);
     }
@@ -323,4 +322,31 @@ test "threading" {
     try assert(tick, 0);
     std.time.sleep(3 * std.time.ns_per_s / 2);
     try assert(tick, 1);
+}
+
+test "HashMap" {
+    const Point = struct { x: i32, y: i32 };
+
+    var map = std.AutoHashMap(u32, Point).init(
+        std.heap.page_allocator,
+    );
+    defer map.deinit();
+
+    try map.put(1525, .{ .x = 1, .y = -4 });
+    try map.put(1550, .{ .x = 2, .y = -3 });
+    try map.put(1575, .{ .x = 3, .y = -2 });
+    try map.put(1600, .{ .x = 4, .y = -1 });
+
+    try assert(map.count(), 4);
+
+    var sum = Point{ .x = 0, .y = 0 };
+    var iterator = map.iterator();
+
+    while (iterator.next()) |entry| {
+        sum.x += entry.value_ptr.x;
+        sum.y += entry.value_ptr.y;
+    }
+
+    try assert(sum.x, 10);
+    try assert(sum.y, -10);
 }
