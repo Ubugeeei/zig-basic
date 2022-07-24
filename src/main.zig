@@ -169,3 +169,12 @@ test "out of bounds, no safety" {
     const b = a[index];
     _ = b;
 }
+
+fn increment(num: *u8) void {
+    num.* += 1;
+}
+test "pointers" {
+    var x: u8 = 1;
+    increment(&x);
+    try assert(x, 2);
+}
