@@ -191,3 +191,16 @@ test "enum ordinal value" {
     try assert(@enumToInt(Value.one), 1);
     try assert(@enumToInt(Value.two), 2);
 }
+
+test "set enum ordinal value" {
+    const Value2 = enum(u32) {
+        hundred = 100,
+        thousand = 1000,
+        million = 1000000,
+        next,
+    };
+    try assert(@enumToInt(Value2.hundred), 100);
+    try assert(@enumToInt(Value2.thousand), 1000);
+    try assert(@enumToInt(Value2.million), 1000000);
+    try assert(@enumToInt(Value2.next), 1000001);
+}
