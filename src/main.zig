@@ -178,3 +178,9 @@ test "pointers" {
     increment(&x);
     try assert(x, 2);
 }
+
+test "slices" {
+    const array = [_]u8{ 1, 2, 3, 4, 5 };
+    const slice = array[0..3];
+    try assert(slice[slice.len - 1], 3);
+}
