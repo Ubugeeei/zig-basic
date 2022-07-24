@@ -215,14 +215,24 @@ const Suit = enum {
     }
 };
 test "enum method" {
-// const Suit = enum {
-//     clubs,
-//     spades,
-//     diamonds,
-//     hearts,
-//     pub fn isClubs(self: Suit) bool { // error!
-//         return self == Suit.clubs;
-//     }
-// };
+    // const Suit = enum {
+    //     clubs,
+    //     spades,
+    //     diamonds,
+    //     hearts,
+    //     pub fn isClubs(self: Suit) bool { // error!
+    //         return self == Suit.clubs;
+    //     }
+    // };
     try assert(Suit.spades.isClubs(), Suit.isClubs(.spades));
+}
+
+test "struct usage" {
+    const Vec3 = struct { x: f32, y: f32, z: f32 };
+    const my_vector = Vec3{
+        .x = 0,
+        .y = 100,
+        .z = 50,
+    };
+    _ = my_vector;
 }
