@@ -76,3 +76,13 @@ test "while with continue" {
     }
     try assert(sum, 4);
 }
+
+test "while with break" {
+    var sum: u8 = 0;
+    var i: u8 = 0;
+    while (i <= 3) : (i += 1) {
+        if (i == 2) break;
+        sum += i;
+    }
+    try assert(sum, 1);
+}
