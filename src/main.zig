@@ -275,7 +275,7 @@ test "optional" {
 }
 
 test "vector add" {
-    const Vector = @import("std").meta.Vector;
+    const Vector = std.meta.Vector;
     const x: Vector(4, f32) = .{ 1, -10, 20, -1 };
     const y: Vector(4, f32) = .{ 2, 10, 0, 1 };
     const z = x + y;
@@ -283,10 +283,20 @@ test "vector add" {
 }
 
 test "allocation" {
-    const allocator = @import("std").heap.page_allocator;
+    const allocator = std.heap.page_allocator;
     const memory = try allocator.alloc(u8, 100);
     defer allocator.free(memory);
 
     try assert(memory.len, 100);
     try assert(@TypeOf(memory), []u8);
+}
+
+test "fmt" {
+    const allocator = std.heap.page_allocator;
+    const string = try std.fmt.allocPrint(
+        allocator,
+        "{d} + {d} = {d}",
+        .{ 9, 10, 19 },
+    );
+    defer allocator.free(string);
 }
