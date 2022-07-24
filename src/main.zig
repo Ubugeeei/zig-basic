@@ -106,3 +106,12 @@ test "for" {
 
     for (string) |_| {}
 }
+
+fn addFive(x: u32) u32 {
+    return x + 5;
+}
+test "function" {
+    const y = addFive(0);
+    try assert(@TypeOf(y), u32);
+    try assert(y, 5);
+}
