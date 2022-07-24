@@ -115,3 +115,13 @@ test "function" {
     try assert(@TypeOf(y), u32);
     try assert(y, 5);
 }
+
+fn failingFunction() error{Oops}!void {
+    return error.Oops;
+}
+test "exception" {
+    failingFunction() catch |err| {
+        try assert(err, error.Oops);
+        return;
+    };
+}
