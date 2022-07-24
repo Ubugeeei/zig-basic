@@ -252,3 +252,15 @@ test "automatic dereference" {
     try assert(thing.x, 20);
     try assert(thing.y, 10);
 }
+
+test "union" {
+    const Tag = enum { a, b, c };
+    const Tagged = union(Tag) { a: u8, b: f32, c: bool };
+    var value = Tagged{ .b = 1.5 };
+    switch (value) {
+        .a => |*byte| byte.* += 1,
+        .b => |*float| float.* *= 2,
+        .c => |*b| b.* = !b.*,
+    }
+    try assert(value.b, 3);
+}
