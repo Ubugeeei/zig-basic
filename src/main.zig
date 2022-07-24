@@ -300,3 +300,11 @@ test "fmt" {
     );
     defer allocator.free(string);
 }
+
+test "print" {
+    const out_file = std.io.getStdOut();
+    try out_file.writer().print(
+        "Hello, {s}!\n",
+        .{"World"},
+    );
+}
