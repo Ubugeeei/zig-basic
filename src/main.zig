@@ -184,3 +184,10 @@ test "slices" {
     const slice = array[0..3];
     try assert(slice[slice.len - 1], 3);
 }
+
+test "enum ordinal value" {
+    const Value = enum(u2) { zero, one, two };
+    try assert(@enumToInt(Value.zero), 0);
+    try assert(@enumToInt(Value.one), 1);
+    try assert(@enumToInt(Value.two), 2);
+}
