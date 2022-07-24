@@ -19,3 +19,14 @@ test "assertion" {
     x = @as(i32, 1);
     try assert(x, 1);
 }
+
+test "array" {
+    const a = [5]u8{ 'h', 'e', 'l', 'l', 'o' };
+    const b = [_]u8{ 'w', 'o', 'r', 'l', 'd' };
+
+    try assert(a.len, 5);
+    try assert(a[1], 'e');
+
+    try assert(b.len, 5);
+    try assert(b[4], 'd');
+}
