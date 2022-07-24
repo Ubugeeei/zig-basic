@@ -49,3 +49,11 @@ test "if statement expression" {
 
     try assert(x, 1);
 }
+
+test "while" {
+    var i: u8 = 2;
+    while (i < 100) {
+        i *= 2;
+    }
+    try assert(i, 128);
+}
